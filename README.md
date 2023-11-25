@@ -1,9 +1,13 @@
 # Spatial envelope optimization and benchmarks
 
-A [Mojo](https://github.com/modularml/mojo)🔥 project calculating the spatial envelope, and exploring the
-performance of Python, NumPy, and Mojo.
-
 [![Run Tests](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml/badge.svg)](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml)
+
+A [Mojo](https://github.com/modularml/mojo)🔥 project created for the [MonCon23
+contest](https://www.modular.com/mojo).
+
+Calculates the spatial envelope, and explores the performance of Python, NumPy,
+and Mojo. *The Mojo final implementation is 20X to 600X faster than Python,
+and 1.3X to 4X faster than [NumPy](https://numpy.org/).*
 
 ## Envelope
 
@@ -26,18 +30,18 @@ Figure attribution: [QGIS documentation](https://docs.qgis.org/3.28/en/docs/user
 
 ## Variants also considered
 
-I wanted to benchmark the [Shapely](https://shapely.readthedocs.io/en/stable/)
-package which wraps the [GEOS library](https://libgeos.org/), another
-well-optimized C/C++ codebase. However Shapely seems to cache the envelope upon
-geometry creation, so it was not feasible to benchmark the envelope
-calculations separately from geometry constructors. Using NumPy seemed like a
-good alternative.
+The [Shapely](https://shapely.readthedocs.io/en/stable/) package wraps the
+[GEOS library](https://libgeos.org/), another well-optimized C/C++ codebase.
+Shapely caches the envelope upon geometry creation, so it was not feasible to
+benchmark the envelope calculations separately from geometry constructors. For
+that reason, Shapely was not included in the benchmarks.
 
 ## All benchmarks
 
 Test system: mojo `0.5.0` on Apple M2, 24GB RAM. Data type: `float32`.
 
 ![overall benchmarks](./docs/img/benchmarks-1.png)
+[raw results spreadsheet](./docs/benchmark-results.ods)
 
 ## Chart of optimized variants only
 
@@ -62,7 +66,7 @@ In other words, the same generic code can run, for example, `float16`,
 dimensions is sometimes referred to as XY, XYZ, or XYZM, where Z is "height",
 and M is "measure".
 
-## Example output from Mojo's `benchmark` module
+## Example output including Mojo's `benchmark` report
 
 ```text
 $ mojo mojo_impl/optimized_a.mojo 100

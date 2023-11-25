@@ -14,10 +14,10 @@ alias width = 1000
 
 
 fn main() raises:
-    test_naive_mojo_impls()
+    test_mojo_impls()
 
 
-fn test_naive_mojo_impls():
+fn test_mojo_impls():
     let test = MojoTest("mojo implementations are all consistent")
 
     # create a tensor, filled with random values
