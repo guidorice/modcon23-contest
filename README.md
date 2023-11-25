@@ -18,7 +18,7 @@ Figure attribution: [QGIS documentation](https://docs.qgis.org/3.28/en/docs/user
 
 - naïve Python
 - naïve Mojo
-- [NumPy](https://numpy.org/) optimized Python
+- Python using [NumPy](https://numpy.org/) (well-optimized C code)
 - Mojo optimized with vectorization and loop unrolling, single-threaded (mojo optimized "a")
 - Mojo optimized with parallelization, vectorization and loop unrolling. (mojo optimized "b")
 
@@ -44,9 +44,41 @@ auto-tuning, stack allocation, and tiled/striped memory access. A fusion of
 Mojo optimized "a" and "b" could offer the best performance across all feature
 sizes.
 
-3. In addition to being performance winners, the Mojo versions are
+3. In addition to being performance winners, the Mojo variants are
 parameterized by the number of dimensions (`dims`) and by data type (`dtype`).
 In other words, the same generic code can run, for example, `float16`,
 `float64` or with 3, 4 or more dimensions. In GIS systems the number of
 dimensions is sometimes referred to as XY, XYZ, or XYZM, where Z is "height",
 and M is "measure".
+
+## Example output from Mojo's `benchmark` module
+
+```
+$ mojo mojo_impl/optimized_a.mojo 100
+float32 100
+---------------------
+Benchmark Report (s)
+---------------------
+Mean: 6.5356175103213615e-07
+Total: 0.75083200000000005
+Iters: 1148831
+Warmup Mean: 9.9999999999999995e-07
+Warmup Total: 1.9999999999999999e-06
+Warmup Iters: 2
+Fastest Mean: 6.4460000000000004e-07
+Slowest Mean: 7.9999999999999996e-07
+
+ns: 653.56175103213616
+microsecs: 0.6535617510321361
+ms: 0.0006535617510321361
+s: 6.5356175103213615e-07
+```
+
+## 🍰 AI tries to draw spatial envelopes
+
+See the [easter egg file](./easter_egg.txt) for some entertaining
+ascii art drawings.
+
+TODO: easter egg
+TODO: unit tests
+TODO: makefile
