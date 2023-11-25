@@ -1,0 +1,10 @@
+name: modcon23-contest
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - ipykernel
+  - numpy
+  - pip
+  - pip:
+     - git+https://github.com/guidorice/mojo-pytest.git@v0.2.0
