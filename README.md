@@ -40,7 +40,9 @@ at least an additional 25% speedup by using one thread per dimension, as shown i
 [Mojo optimized "b"](./mojo_impl/optimized_b.mojo).
 
 2. Even more performance optimizations are possibly left on the table, such as
-autotuning, and tiled/striped memory access.
+auto-tuning, stack allocation, and tiled/striped memory access. A fusion of
+Mojo optimized "a" and "b" could offer the best performance across all feature
+sizes.
 
 3. In addition to being performance winners, the Mojo versions are parameterized by
 the number of dimensions (`dims`) and by data type (`dtype`). In other words,
