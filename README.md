@@ -39,8 +39,8 @@ performer, but for large feature spaces (millions of points) by adding an
 additional thread per dimension we can get about an additional 25% speedup as
 shown in [Mojo optimized "b"](./mojo_impl/optimized_b.mojo).
 
-2. In addition to the performance gains, the Mojo versions are parameterized by
+2. In addition to the performance gains, the Mojo versions are parameterized
 the number of dimensions (`dims`) and by data type (`dtype`). In other words,
-the same code can run with for example, `float16`, `float64` or with 3 or 4 or
-more dimensions. In GIS systems this commonly referred to as XY, XYZ, or XYZM,
-where Z is "height", and M is "measure".
+the same generic code can run with for example, `float16`, `float64` or with 3,
+4 or more dimensions. In GIS systems this commonly referred to as XY, XYZ, or
+XYZM, where Z is "height", and M is "measure".
