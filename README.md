@@ -3,6 +3,8 @@
 A [Mojo](https://github.com/modularml/mojo)🔥 project calculating the spatial envelope, and exploring the
 performance of Python, NumPy, and Mojo.
 
+[![Run Tests](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml/badge.svg)](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml)
+
 ## Envelope
 
 Calculating an envelope is a fundamental part of spatial analysis. The envelope
