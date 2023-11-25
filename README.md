@@ -28,7 +28,7 @@ Test system: mojo `0.5.0` on Apple M2, 24GB RAM. Data type: `float32`.
 
 ![overall benchmarks](./docs/img/benchmarks-1.png)
 
-## Optimized variants only
+## Chart of optimized variants only
 
 ![optimized benchmarks](./docs/img/benchmarks-2.png)
 
