@@ -1,6 +1,7 @@
 from math import inf
 import numpy as np
 
+
 def envelope(x_coords: list[float], y_coords: list[float]) -> list[float]:
     """
     Calculate envelope with iterative, plain python code.
@@ -17,7 +18,7 @@ def envelope(x_coords: list[float], y_coords: list[float]) -> list[float]:
             result[0] = x
         if y < result[1]:
             result[1] = y
-        
+
         if x > result[2]:
             result[2] = x
         if y > result[3]:

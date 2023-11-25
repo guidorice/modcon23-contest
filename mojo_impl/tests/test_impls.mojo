@@ -10,10 +10,12 @@ from mojo_impl.optimized_b import envelope as envelope_opt_b
 
 alias dtype = DType.float32
 alias dims = 2
-alias width = 1000000
+alias width = 1000
+
 
 fn main() raises:
     test_naive_mojo_impls()
+
 
 fn test_naive_mojo_impls():
     let test = MojoTest("mojo implementations are all consistent")

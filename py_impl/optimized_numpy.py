@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def envelope(arr: np.array) -> list[float]:
     """
     Calculate envelope with numpy, 'the fundamental package for scientific computing with Python'.
