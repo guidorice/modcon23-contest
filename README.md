@@ -74,7 +74,7 @@ ms: 0.0006535617510321361
 s: 6.5356175103213615e-07
 ```
 
-## 🍰 AI tries to draw spatial envelopes
+## 🍰 claude.ai tries to draw spatial envelopes
 
 See the [easter egg file](./easter_egg.txt) for some entertaining
 ascii art drawings.
