@@ -47,9 +47,6 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, dims 
 
     return result
 
-from python import Python, PythonObject
-from testing import assert_true
-
 fn main() raises:
     let width = atol(argv()[1])
     alias dtype = DType.float32
