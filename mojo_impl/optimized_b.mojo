@@ -8,6 +8,7 @@ from sys.info import simdbitwidth
 from tensor import Tensor, TensorSpec
 from utils.index import Index
 
+alias nelts = simdbitwidth()
 
 fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * dims]:
     """
@@ -16,9 +17,8 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
     @parameter
     constrained[dims > 0 and dims % 2 == 0, "power-of-two dims only"]()
  
-    alias nelts = simdbitwidth()
-    alias NegInf = neginf[dtype]()
-    alias Inf = inf[dtype]()
+    let NegInf = neginf[dtype]()
+    let Inf = inf[dtype]()
     let num_features = tensor.shape()[1]
 
     var result = SIMD[dtype, 2 * dims]()
@@ -50,17 +50,23 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
 
     return result
 
+alias dtype = DType.float32
+alias dims = 2
 
 fn main() raises:
-    let width = atol(argv()[1])
-    alias dtype = DType.float32
-    alias dims = 2
+    """
+    Usage: `mojo optimized_b.mojo {n}` , where n is an integer number of features.
+    """
+
+    # read number of features
+    var width = atol(argv()[1])
     print(dtype, width)
     
+    # create a tensor, filled with random values
     let spec = TensorSpec(dtype, dims, width)
     let tensor = rand[dtype](spec)
-    let res = envelope[dtype, dims](tensor)
 
+    # run bechmark module
     @parameter
     fn envelope_worker():
         _ = envelope[dtype, dims](tensor)
@@ -68,7 +74,9 @@ fn main() raises:
     let mojo_report = benchmark.run[envelope_worker]()
     mojo_report.print()
     let secs = mojo_report.mean["s"]()
-    print("ns:", secs * 10 ** 9)
+    let ns = mojo_report.mean["ns"]()
+    let ms = mojo_report.mean["ms"]()
+    print("ns:", ns)
     print("microsecs:", secs * 10 ** 6)
-    print("ms:", secs * 10 ** 3)
+    print("ms:", ms)
     print("s:", secs)

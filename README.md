@@ -16,11 +16,20 @@ Figure attribution: [QGIS documentation](https://docs.qgis.org/3.28/en/docs/user
 
 ## Variants benchmarked
 
-- naïve Python
-- naïve Mojo
-- Python using [NumPy](https://numpy.org/) (well-optimized C code)
-- Mojo optimized with vectorization and loop unrolling, single-threaded (mojo optimized "a")
-- Mojo optimized with parallelization, vectorization and loop unrolling. (mojo optimized "b")
+- [naïve Python](./py_impl/naive.py)
+- [naïve Mojo](./mojo_impl/naive.mojo)
+- [Python using NumPy (well-optimized C code)](./py_impl/optimized_numpy.py)
+- [Mojo optimized with vectorization and loop unrolling, single-threaded (mojo optimized "a")](./mojo_impl/optimized_a.mojo)
+- [Mojo optimized with parallelization, vectorization and loop unrolling. (mojo optimized "b")](./mojo_impl/optimized_b.mojo)
+
+## Variants also considered
+
+I wanted to benchmark the [Shapely](https://shapely.readthedocs.io/en/stable/)
+package which wraps the [GEOS library](https://libgeos.org/), another
+well-optimized C/C++ codebase. However Shapely seems to cache the envelope upon
+geometry creation, so it was not feasible to benchmark the envelope
+calculations separately from geometry constructors. Using NumPy seemed like a
+good alternative.
 
 ## All benchmarks
 
@@ -53,7 +62,7 @@ and M is "measure".
 
 ## Example output from Mojo's `benchmark` module
 
-```
+```text
 $ mojo mojo_impl/optimized_a.mojo 100
 float32 100
 ---------------------
@@ -74,11 +83,5 @@ ms: 0.0006535617510321361
 s: 6.5356175103213615e-07
 ```
 
-## 🍰 claude.ai tries to draw spatial envelopes
-
-See the [easter egg file](./easter_egg.txt) for some entertaining
-ascii art drawings.
-
-TODO: easter egg
 TODO: unit tests
 TODO: makefile
