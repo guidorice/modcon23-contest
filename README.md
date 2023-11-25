@@ -35,11 +35,14 @@ Test system: mojo `0.5.0` on Apple M2, 24GB RAM. Data type: `float32`.
 ## Key Findings
 
 1. [Mojo optimized "a"](./mojo_impl/optimized_a.mojo) is the best overall
-performer, but for large feature spaces (millions of points) by adding an
-additional thread per dimension we can get about an additional 25% speedup as
-shown in [Mojo optimized "b"](./mojo_impl/optimized_b.mojo).
+performer. However for large feature spaces (millions of points) we can get
+at least an additional 25% speedup by using one thread per dimension, as shown in
+[Mojo optimized "b"](./mojo_impl/optimized_b.mojo).
 
-2. In addition to being performance winners, the Mojo versions are parameterized by
+2. Even more performance optimizations are possibly left on the table, such as
+autotuning, and tiled/striped memory access.
+
+3. In addition to being performance winners, the Mojo versions are parameterized by
 the number of dimensions (`dims`) and by data type (`dtype`). In other words,
 the same generic code can run, for example, `float16`, `float64` or with 3,
 4 or more dimensions. In GIS systems this is often referred to as XY, XYZ, or
