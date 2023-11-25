@@ -3,9 +3,5 @@ channels:
   - defaults
 dependencies:
   - python=3.11
-  - matplotlib
-  - pip
-  - pytest
-  - shapely
-  - pip:
-      - git+https://github.com/guidorice/mojo-pytest.git@v0.2.0
+  - ipykernel
+  - numpy
