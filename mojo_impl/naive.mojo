@@ -50,7 +50,7 @@ fn main() raises:
     let spec = TensorSpec(dtype, dims, width)
     let tensor = rand[dtype](spec)
 
-    # run bechmark module
+    # run benchmark module
     @parameter
     fn envelope_worker():
         _ = envelope[dtype, dims](tensor)
