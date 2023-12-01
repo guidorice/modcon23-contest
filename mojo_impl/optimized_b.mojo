@@ -1,7 +1,7 @@
 import benchmark
 from algorithm import vectorize
 from algorithm.functional import parallelize
-from math.limit import inf, neginf
+from math.limit import inf, neginf, max_finite, min_finite
 from random import rand
 from sys import argv
 from sys.info import simdbitwidth
@@ -17,19 +17,28 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
     @parameter
     constrained[dims > 0 and dims % 2 == 0, "power-of-two dims only"]()
  
-    let NegInf = neginf[dtype]()
-    let Inf = inf[dtype]()
     let num_features = tensor.shape()[1]
+    var result = Tensor[dtype](TensorSpec(dtype, 1, 2 * dims))
 
-    var result = SIMD[dtype, 2 * dims]()
-
-    @unroll
-    for d in range(dims):
-        result[d] = Inf
-
-    @unroll
-    for d in range(dims, 2 * dims):
-        result[d] = NegInf
+    @parameter
+    if dtype.is_floating_point():
+        let min_start = inf[dtype]()
+        let max_start = neginf[dtype]()
+        @unroll
+        for d in range(dims):
+            result[d] = min_start
+        @unroll
+        for d in range(dims, 2 * dims):
+            result[d] = max_start
+    else:  # integral types
+        let min_start = max_finite[dtype]()
+        let max_start = min_finite[dtype]()
+        @unroll
+        for d in range(dims):
+            result[d] = min_start
+        @unroll
+        for d in range(dims, 2 * dims):
+            result[d] = max_start
 
     @parameter
     fn min_max_task(dim: Int):
@@ -48,7 +57,7 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
 
     parallelize[min_max_task](dims)
 
-    return result
+    return result.simd_load[2 * dims]()
 
 alias dtype = DType.float32
 alias dims = 2
@@ -80,3 +89,4 @@ fn main() raises:
     print("microsecs:", secs * 10 ** 6)
     print("ms:", ms)
     print("s:", secs)
+    print()
