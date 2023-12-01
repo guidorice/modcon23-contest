@@ -21,7 +21,7 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
     let Inf = inf[dtype]()
     let num_features = tensor.shape()[1]
 
-    var result = SIMD[dtype, 2 * dims]()
+    var result = Tensor[dtype](TensorSpec(dtype, 1, 2 * dims))
 
     @unroll
     for d in range(dims):
@@ -48,9 +48,9 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
 
     parallelize[min_max_task](dims)
 
-    return result
+    return result.simd_load[2 * dims]()
 
-alias dtype = DType.float32
+alias dtype = DType.float64
 alias dims = 2
 
 fn main() raises:
@@ -80,3 +80,4 @@ fn main() raises:
     print("microsecs:", secs * 10 ** 6)
     print("ms:", ms)
     print("s:", secs)
+    print()

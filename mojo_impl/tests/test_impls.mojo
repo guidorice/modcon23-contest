@@ -8,17 +8,17 @@ from mojo_impl.naive import envelope as envelope_naive
 from mojo_impl.optimized_a import envelope as envelope_opt_a
 from mojo_impl.optimized_b import envelope as envelope_opt_b
 
-alias dtype = DType.float32
-alias dims = 2
-alias width = 1000
-
 
 fn main() raises:
-    test_mojo_impls()
+    test_mojo_impls_float_64()
 
 
-fn test_mojo_impls():
-    let test = MojoTest("mojo implementations are all consistent")
+fn test_mojo_impls_float_64():
+
+    alias dtype = DType.float64
+    alias dims = 2
+    let width = 1000
+    let test = MojoTest("mojo implementations are all consistent: " + dtype.__str__())
 
     # create a tensor, filled with random values
     let spec = TensorSpec(dtype, dims, width)

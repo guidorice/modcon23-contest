@@ -34,7 +34,7 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
 
     return result
 
-alias dtype = DType.float32
+alias dtype = DType.float64
 alias dims = 2
 
 fn main() raises:
@@ -64,3 +64,4 @@ fn main() raises:
     print("microsecs:", secs * 10 ** 6)
     print("ms:", ms)
     print("s:", secs)
+    print()
