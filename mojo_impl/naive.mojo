@@ -1,5 +1,5 @@
 import benchmark
-from math.limit import inf, neginf
+from math.limit import inf, neginf, max_finite, min_finite
 from random import rand
 from sys import argv
 from tensor import Tensor, TensorSpec
@@ -13,16 +13,28 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
     @parameter
     constrained[dims > 0 and dims % 2 == 0, "power-of-two dims only"]()
  
-    let NegInf = neginf[dtype]()
-    let Inf = inf[dtype]()
     let num_features = tensor.shape()[1]
     var result = SIMD[dtype, 2 * dims]()
 
-    for d in range(dims):
-        result[d] = Inf
-
-    for d in range(dims, 2 * dims):
-        result[d] = NegInf
+    @parameter
+    if dtype.is_floating_point():
+        let min_start = inf[dtype]()
+        let max_start = neginf[dtype]()
+        @unroll
+        for d in range(dims):
+            result[d] = min_start
+        @unroll
+        for d in range(dims, 2 * dims):
+            result[d] = max_start
+    else:  # integral types
+        let min_start = max_finite[dtype]()
+        let max_start = min_finite[dtype]()
+        @unroll
+        for d in range(dims):
+            result[d] = min_start
+        @unroll
+        for d in range(dims, 2 * dims):
+            result[d] = max_start
 
     for y in range(dims):
         for x in range(num_features):
