@@ -8,7 +8,7 @@ def test_python_impls():
     """
     Test the python implementations are consistent.
     """
-    multipoint_10_3 = np.array(np.random.rand(2, 10**3), dtype=np.float32)
+    multipoint_10_3 = np.array(np.random.rand(2, 10**3), np.float64)
 
     result_naive = envelope_naive(
         x_coords=list(multipoint_10_3[0]), y_coords=list(multipoint_10_3[1])
