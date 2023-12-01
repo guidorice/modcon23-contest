@@ -18,7 +18,7 @@ that encompass the bounded feature(s).
 
 ![bounding box](./docs/img/bounding_box.png)
 
-Figure attribution: [QGIS documentation](https://docs.qgis.org/3.28/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#bounding-boxes): Fig. 27.53 Black lines represent the bounding boxes of each polygon feature.
+Figure attribution: [QGIS documentation](https://docs.qgis.org): Fig. 27.53 Black lines represent the bounding boxes of each polygon feature.
 
 ## Variants benchmarked
 
