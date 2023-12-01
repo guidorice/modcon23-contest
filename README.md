@@ -61,8 +61,8 @@ sizes.
 
 3. In addition to being performance winners, the Mojo variants are
 parameterized by the number of dimensions (`dims`) and by data type (`dtype`).
-In other words, the same generic code can run, for example, `float16`,
-`float64` or with 3, 4 or more dimensions. In GIS systems the number of
+In other words, the same generic code can run, for example, `int16`, `float16`,
+`float64`, and with 3, 4 or more dimensions. In GIS systems the number of
 dimensions is sometimes referred to as XY, XYZ, or XYZM, where Z is "height",
 and M is "measure".
 
