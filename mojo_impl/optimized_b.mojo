@@ -59,7 +59,7 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
 
     return result.simd_load[2 * dims]()
 
-alias dtype = DType.float32
+alias dtype = DType.float64
 alias dims = 2
 
 fn main() raises:
