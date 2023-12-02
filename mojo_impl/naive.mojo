@@ -20,19 +20,15 @@ fn envelope[dtype: DType, dims: Int](tensor: Tensor[dtype]) -> SIMD[dtype, 2 * d
     if dtype.is_floating_point():
         let min_start = inf[dtype]()
         let max_start = neginf[dtype]()
-        @unroll
         for d in range(dims):
             result[d] = min_start
-        @unroll
         for d in range(dims, 2 * dims):
             result[d] = max_start
     else:  # integral types
         let min_start = max_finite[dtype]()
         let max_start = min_finite[dtype]()
-        @unroll
         for d in range(dims):
             result[d] = min_start
-        @unroll
         for d in range(dims, 2 * dims):
             result[d] = max_start
 
