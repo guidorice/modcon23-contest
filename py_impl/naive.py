@@ -1,5 +1,4 @@
 from math import inf
-import numpy as np
 
 
 def envelope(x_coords: list[float], y_coords: list[float]) -> list[float]:
