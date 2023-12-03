@@ -1,5 +1,7 @@
 # Spatial envelope optimization and benchmarks
 
+[![Run Tests](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml/badge.svg)](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml)
+
 A [Mojo](https://github.com/modularml/mojo)🔥 project created for the [MonCon23
 contest](https://www.modular.com/mojo).
 
