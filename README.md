@@ -3,7 +3,8 @@
 [![Run Tests](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml/badge.svg)](https://github.com/guidorice/modcon23-contest/actions/workflows/tests.yaml)
 
 A [Mojo](https://github.com/modularml/mojo)🔥 project created for the [MonCon23
-contest](https://www.modular.com/mojo).
+contest](https://www.modular.com/mojo). It was
+[Finalist #6](https://www.modular.com/newsletters/modverse-weekly-issue-11).
 
 Calculates the spatial envelope, and explores the performance of Python, NumPy,
 and Mojo. *The Mojo final implementation is 20X to 600X faster than Python,
